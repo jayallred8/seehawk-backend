@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 
-// Make sure you add your API key in Vercel → Settings → Environment Variables
+// API key is stored in Vercel -> Environment Variables
 const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 export default async function handler(req, res) {
@@ -20,7 +20,8 @@ export default async function handler(req, res) {
       messages: [
         {
           role: "system",
-          content: "You are SEEHAWK AI, a personal assistant that organizes schedules, tasks, study plans, work priorities, and gives clear structured responses."
+          content:
+            "You are SEEHAWK AI — a sharp, structured personal assistant that helps with studying, schedules, task breakdowns, and business workflows. Always reply with clarity and organization."
         },
         {
           role: "user",
@@ -30,7 +31,6 @@ export default async function handler(req, res) {
     });
 
     const reply = response.choices[0].message.content;
-
     return res.status(200).json({ reply });
   } catch (err) {
     console.error("SEEHAWK error:", err);
